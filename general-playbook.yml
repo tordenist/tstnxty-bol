@@ -1,0 +1,49 @@
+- hosts: 127.0.0.1
+  connection: local
+
+  tasks:
+  - name: create user 'testuser' and its specific settings
+    user:
+      name: testuser
+      comment: Test User
+      uid: 1001
+
+  - pam_limits:
+      domain: testuser
+      limit_type: '-'
+      limit_item: nofile
+      value: 8192
+
+  - lineinfile:
+      path: /etc/sudoers
+      state: present
+      regexp: '^%testuser\s'
+      line: '%testuser ALL=(ALL) NOPASSWD: /usr/bin/yum'
+
+  - name: install ntpdate
+    package:
+      name: ntpdate
+      state: present
+
+  - lineinfile:
+      path: /etc/hots
+      line: '127.0.0.1 bol.com'
+
+  - name: install gcc
+    package:
+      name: gcc
+      state: present
+
+  - name: Download foo.conf
+    get_url:
+      url: https://ftp.gnu.org/gnu/hello/hello-2.10.tar.gz
+      dest: /opt
+
+  - name: Extract hello into /opt
+    unarchive:
+      src: /opt/hello-2.10.tar.gz
+      dest: /opt
+
+  - name: configuring location
+    command: cd /opt/hello-2.10 && ./configure --prefix=/opt/hello && make && make install
+    become: yes
