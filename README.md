@@ -7,3 +7,8 @@ Lessons learned:
 - We still have a long way battling anxiety here.
 - Abstraction is a bitch.
 - Failures are natural and I have to learn how to accept them.
+
+#TODO
+
+- Partitioning and Tomcat
+- Improve execution structure
