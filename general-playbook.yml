@@ -22,6 +22,7 @@
 
   - file:
       path: /opt/foo
+      state: touch
       owner: testuser
       mode: 0644
 
@@ -31,7 +32,7 @@
       state: present
 
   - lineinfile:
-      path: /etc/hots
+      path: /etc/hosts
       line: '127.0.0.1 bol.com'
 
   - name: install gcc
