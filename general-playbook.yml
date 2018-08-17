@@ -20,6 +20,11 @@
       regexp: '^%testuser\s'
       line: '%testuser ALL=(ALL) NOPASSWD: /usr/bin/yum'
 
+  - file:
+      path: /opt/foo
+      owner: testuser
+      mode: 0644
+
   - name: install ntpdate
     package:
       name: ntpdate
@@ -34,7 +39,7 @@
       name: gcc
       state: present
 
-  - name: Download foo.conf
+  - name: Download GNU's Hello
     get_url:
       url: https://ftp.gnu.org/gnu/hello/hello-2.10.tar.gz
       dest: /opt
