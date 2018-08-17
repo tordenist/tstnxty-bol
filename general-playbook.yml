@@ -57,7 +57,7 @@
       chdir: /opt/hello-2.10/
 
   - name: Installing hello
-    become: yes
     shell: make && make install
+    become: yes
     args:
       chdir: /opt/hello-2.10/
