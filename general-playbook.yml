@@ -50,6 +50,14 @@
       src: /opt/hello-2.10.tar.gz
       dest: /opt
 
-  - name: configuring location
-    command: cd /opt/hello-2.10 && ./configure --prefix=/opt/hello && make && make install
+  - name: configuring hello location
+    command: ./configure --prefix=/opt/hello
     become: yes
+    args:
+      chdir: /opt/hello-2.10/
+
+  - name: Installing hello
+    become: yes
+    shell: make && make install
+    args:
+      chdir: /opt/hello-2.10/
